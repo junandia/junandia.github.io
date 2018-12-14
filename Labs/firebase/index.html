@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>FireBase CRUD - Junandia Group</title>
+	<script src="https://www.gstatic.com/firebasejs/5.5.7/firebase.js"></script>
+	<script src="aset/firebase.js"></script>
+</head>
+<body>
+	<table>
+		<tr>
+			<td>ID</td>
+			<td><input type="text" name="user_id" id="user_id"></td>
+		</tr>
+		<tr>
+			<td>Username</td>
+			<td><input type="text" name="username" id="username"></td>
+		</tr>
+		<tr>
+			<td>Password</td>
+			<td><input type="text" name="password" id="password"></td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<input type="button" value="Simpan" onclick="simpan_data()">
+				<input type="button" value="Ubah" onclick="ubah_data()">
+				<input type="button" value="Hapus" onclick="hapus_data()">
+			</td>
+		</tr>
+	</table>
+
+	<h2>List Data</h2>
+	<table id="tbl_data" border="1">
+		<tr>
+			<td>#ID</td>
+			<td>Username</td>
+			<td>Password</td>
+			<td colspan="2">Aksi</td>
+		</tr>
+	</table>
+<script src="aset/user.js"></script>
+</body>
+</html>
