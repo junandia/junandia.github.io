@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Manipulation Tool - Junandia Labs</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .header-section {
+            background: linear-gradient(135deg, #007bff 0%, #6610f2 100%);
+            color: white;
+            padding: 3rem 0;
+            margin-bottom: 2rem;
+        }
+        .tool-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        textarea {
+            width: 100%;
+            height: 200px;
+            font-family: monospace;
+            padding: 1rem;
+            border: 1px solid #dee2e6;
+            border-radius: 0.375rem;
+            resize: vertical;
+        }
+        .btn-group {
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .btn {
+            margin: 0.25rem;
+        }
+        .back-link {
+            color: white;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        .back-link:hover {
+            color: rgba(255,255,255,0.8);
+        }
+        #charCount {
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+    <div class="header-section">
+        <div class="container">
+            <a href="index.html" class="back-link">
+                <i class="bi bi-arrow-left me-2"></i> Kembali ke Portal
+            </a>
+            <h1 class="display-4">Text Manipulation Tool</h1>
+            <p class="lead">Ubah format teks Anda dengan berbagai pilihan kasus</p>
+        </div>
+    </div>
+
+    <div class="container mb-5">
+        <div class="tool-container">
+            <div class="mb-4">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <h3 class="h4 mb-0"><i class="bi bi-text-paragraph me-2"></i>Your Text</h3>
+                    <span id="charCount">Characters: 0</span>
+                </div>
+                <textarea id="inputText" class="mb-3" placeholder="Paste your text here..."></textarea>
+            </div>
+
+            <div class="row g-3">
+                <div class="col-12">
+                    <h4 class="h5 mb-3"><i class="bi bi-magic me-2"></i>Text Transformations</h4>
+                    <div class="btn-group d-flex flex-wrap" role="group">
+                        <button class="btn btn-primary" onclick="transformText('sentence')" data-bs-toggle="tooltip" 
+                            title="Mengubah teks menjadi format kalimat: huruf pertama kapital, sisanya kecil. Contoh: 'This is a sentence.'">
+                            <i class="bi bi-type me-1"></i>Sentence case
+                        </button>
+                        <button class="btn btn-primary" onclick="transformText('lower')" data-bs-toggle="tooltip"
+                            title="Mengubah semua huruf menjadi huruf kecil. Contoh: 'semua huruf kecil'">
+                            <i class="bi bi-type-lowercase me-1"></i>lower case
+                        </button>
+                        <button class="btn btn-primary" onclick="transformText('upper')" data-bs-toggle="tooltip"
+                            title="Mengubah semua huruf menjadi huruf besar. Contoh: 'SEMUA HURUF BESAR'">
+                            <i class="bi bi-type-uppercase me-1"></i>UPPER CASE
+                        </button>
+                        <button class="btn btn-primary" onclick="transformText('capitalized')" data-bs-toggle="tooltip"
+                            title="Mengubah huruf pertama setiap kata menjadi kapital. Contoh: 'Setiap Kata Kapital'">
+                            <i class="bi bi-type-bold me-1"></i>Capitalized Case
+                        </button>
+                        <button class="btn btn-primary" onclick="transformText('alternating')" data-bs-toggle="tooltip"
+                            title="Mengubah huruf secara bergantian antara besar dan kecil. Contoh: 'aLtErNaTiNg'">
+                            <i class="bi bi-type-strikethrough me-1"></i>aLtERNaTinG cAsE
+                        </button>
+                        <button class="btn btn-primary" onclick="transformText('title')" data-bs-toggle="tooltip"
+                            title="Mengubah teks menjadi format judul: huruf pertama setiap kata penting kapital. Contoh: 'The Quick Brown Fox'">
+                            <i class="bi bi-type-underline me-1"></i>Title Case
+                        </button>
+                    </div>
+                    <div class="mt-3 text-muted small">
+                        <div class="row g-3">
+                            <div class="col-md-6 col-lg-4">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h6><i class="bi bi-type"></i> Sentence case</h6>
+                                        <p class="mb-0">Mengubah teks menjadi format kalimat standar, dimana huruf pertama setiap kalimat menjadi kapital dan sisanya huruf kecil.</p>
+                                        <small class="text-muted">Contoh: "This is a sentence. Another sentence here."</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-4">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h6><i class="bi bi-type-lowercase"></i> lower case</h6>
+                                        <p class="mb-0">Mengubah seluruh teks menjadi huruf kecil, berguna untuk format yang memerlukan konsistensi huruf kecil.</p>
+                                        <small class="text-muted">Contoh: "semua huruf menjadi kecil"</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-4">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h6><i class="bi bi-type-uppercase"></i> UPPER CASE</h6>
+                                        <p class="mb-0">Mengubah seluruh teks menjadi huruf besar, cocok untuk judul atau teks yang perlu ditonjolkan.</p>
+                                        <small class="text-muted">Contoh: "SEMUA HURUF MENJADI BESAR"</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-4">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h6><i class="bi bi-type-bold"></i> Capitalized Case</h6>
+                                        <p class="mb-0">Mengubah huruf pertama setiap kata menjadi kapital, cocok untuk judul atau nama.</p>
+                                        <small class="text-muted">Contoh: "Setiap Kata Diawali Huruf Besar"</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-4">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h6><i class="bi bi-type-strikethrough"></i> aLtERNaTinG cAsE</h6>
+                                        <p class="mb-0">Mengubah huruf secara bergantian antara besar dan kecil, biasa digunakan untuk efek dekoratif.</p>
+                                        <small class="text-muted">Contoh: "aLtErNaTiNg TeXt"</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-4">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h6><i class="bi bi-type-underline"></i> Title Case</h6>
+                                        <p class="mb-0">Mengubah teks menjadi format judul standar, dengan kapitalisasi kata-kata penting.</p>
+                                        <small class="text-muted">Contoh: "The Quick Brown Fox Jumps"</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 mt-4">
+                    <h4 class="h5 mb-3"><i class="bi bi-clipboard me-2"></i>Actions</h4>
+                    <div class="btn-group d-flex flex-wrap" role="group">
+                        <button class="btn btn-success" onclick="copyToClipboard()" data-bs-toggle="tooltip"
+                            title="Menyalin teks ke clipboard untuk ditempel di tempat lain">
+                            <i class="bi bi-clipboard me-1"></i>Copy to Clipboard
+                        </button>
+                        <button class="btn btn-success" onclick="downloadText()" data-bs-toggle="tooltip"
+                            title="Mengunduh teks sebagai file .txt">
+                            <i class="bi bi-download me-1"></i>Download Text
+                        </button>
+                        <button class="btn btn-success" onclick="pasteFromClipboard()" data-bs-toggle="tooltip"
+                            title="Menempel teks dari clipboard ke textarea">
+                            <i class="bi bi-clipboard-plus me-1"></i>Paste from Clipboard
+                        </button>
+                        <button class="btn btn-danger" onclick="clearText()" data-bs-toggle="tooltip"
+                            title="Menghapus semua teks dari textarea">
+                            <i class="bi bi-trash me-1"></i>Clear
+                        </button>
+                    </div>
+                    <div class="mt-3 text-muted small">
+                        <div class="row g-3">
+                            <div class="col-md-6 col-lg-3">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h6><i class="bi bi-clipboard"></i> Copy to Clipboard</h6>
+                                        <p class="mb-0">Menyalin seluruh teks ke clipboard komputer Anda, sehingga dapat ditempel di aplikasi lain.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h6><i class="bi bi-download"></i> Download Text</h6>
+                                        <p class="mb-0">Mengunduh teks sebagai file .txt yang dapat disimpan di komputer Anda.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h6><i class="bi bi-clipboard-plus"></i> Paste from Clipboard</h6>
+                                        <p class="mb-0">Menempel teks yang sudah disalin dari clipboard ke area teks.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h6><i class="bi bi-trash"></i> Clear</h6>
+                                        <p class="mb-0">Menghapus semua teks dari area input, memulai dengan area teks kosong.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-light py-3">
+        <div class="container text-center">
+            <p class="mb-0">© 2025 Junandia Labs. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Initialize tooltips
+        document.addEventListener('DOMContentLoaded', function() {
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+        });
+        const textarea = document.getElementById('inputText');
+        const charCount = document.getElementById('charCount');
+
+        // Update character count
+        textarea.addEventListener('input', () => {
+            charCount.textContent = `Characters: ${textarea.value.length}`;
+        });
+
+        function transformText(type) {
+            const text = textarea.value;
+            let result = '';
+
+            switch(type) {
+                case 'sentence':
+                    // Capitalize first letter of each sentence
+                    result = text.toLowerCase().replace(/(^\w|\.\s+\w)/g, letter => letter.toUpperCase());
+                    break;
+                case 'lower':
+                    result = text.toLowerCase();
+                    break;
+                case 'upper':
+                    result = text.toUpperCase();
+                    break;
+                case 'capitalized':
+                    // Capitalize first letter of each word
+                    result = text.toLowerCase().replace(/\b\w/g, letter => letter.toUpperCase());
+                    break;
+                case 'alternating':
+                    // Alternate between upper and lower case
+                    result = text.split('').map((char, i) => 
+                        i % 2 === 0 ? char.toLowerCase() : char.toUpperCase()
+                    ).join('');
+                    break;
+                case 'title':
+                    // Title case: capitalize important words
+                    result = text.toLowerCase().replace(/(?:^|\s)\w/g, letter => letter.toUpperCase());
+                    break;
+            }
+
+            textarea.value = result;
+            textarea.focus();
+        }
+
+        async function copyToClipboard() {
+            try {
+                await navigator.clipboard.writeText(textarea.value);
+                showToast('Text copied to clipboard!');
+            } catch (err) {
+                showToast('Failed to copy text!', true);
+            }
+        }
+
+        function downloadText() {
+            const blob = new Blob([textarea.value], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'text.txt';
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
+        }
+
+        async function pasteFromClipboard() {
+            try {
+                const text = await navigator.clipboard.readText();
+                textarea.value = text;
+                textarea.dispatchEvent(new Event('input'));
+                showToast('Text pasted from clipboard!');
+            } catch (err) {
+                showToast('Failed to paste text!', true);
+            }
+        }
+
+        function clearText() {
+            textarea.value = '';
+            textarea.dispatchEvent(new Event('input'));
+        }
+
+        function showToast(message, isError = false) {
+            // Create toast container if it doesn't exist
+            let toastContainer = document.getElementById('toast-container');
+            if (!toastContainer) {
+                toastContainer = document.createElement('div');
+                toastContainer.id = 'toast-container';
+                toastContainer.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    z-index: 1000;
+                `;
+                document.body.appendChild(toastContainer);
+            }
+
+            // Create toast element
+            const toast = document.createElement('div');
+            toast.className = `alert alert-${isError ? 'danger' : 'success'} alert-dismissible fade show`;
+            toast.innerHTML = `
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+
+            // Add toast to container
+            toastContainer.appendChild(toast);
+
+            // Remove toast after 3 seconds
+            setTimeout(() => {
+                toast.remove();
+            }, 3000);
+        }
+    </script>
+    <script type='text/javascript' src='//pl27915675.effectivegatecpm.com/66/75/f2/6675f24473fe30ef43f6bd401d3541fb.js'></script>
+</body>
+</html>
